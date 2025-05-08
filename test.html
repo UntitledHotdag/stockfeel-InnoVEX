@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>p5.js Landing</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #overlay {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      text-align: center;
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay">
+    <h1>歡迎來到我們的網站</h1>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
+  <script>
+    let particles = [];
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      for (let i = 0; i < 100; i++) {
+        particles.push(createVector(random(width), random(height)));
+      }
+      noStroke();
+    }
+
+    function draw() {
+      background(30, 30, 40, 50);
+      fill(255);
+      particles.forEach(p => {
+        ellipse(p.x, p.y, 4, 4);
+        p.x += random(-1, 1);
+        p.y += random(-1, 1);
+        if (p.x < 0 || p.x > width) p.x = random(width);
+        if (p.y < 0 || p.y > height) p.y = random(height);
+      });
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
+</body>
+</html>
