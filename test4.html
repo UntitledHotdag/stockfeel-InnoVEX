@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>響應式 Landing Page</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    /* 固定背景圖片 */
+    .background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('assets/bg.jpg') center/cover no-repeat;
+      z-index: -1;
+    }
+
+    .container {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+
+    .section {
+      scroll-snap-align: start;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .image-wrapper {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 1s ease, transform 1s ease;
+      max-width: 80%;
+    }
+
+
+    img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 95vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="container">
+
+    <div class="section">
+        <div class="image-wrapper" id="div1">
+        
+    </div>
+</div>
+
+    <div class="section">
+        <div class="image-wrapper" id="div2">
+ 
+    </div>
+</div>
+
+    <div class="section"><div class="image-wrapper">
+  
+    </div>
+</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <script>
+   const sketch1 = (p) => {
+      let img1;
+      p.preload = () => {
+        img1 = p.loadImage('assets/title-1.jpg'); // 請替換成實際的圖片路徑
+      };
+
+      p.setup = () => {
+        const canvas = p.createCanvas(1080 , 1920);
+        canvas.parent("div1");
+      };
+
+      p.draw = () => {
+        p.background(255);
+        p.image(img1, 0, 0, p.width, p.height); // 顯示圖片，填滿畫布
+      };
+    };
+    new p5(sketch1, 'div1');
+
+    // 第二個p5實例：顯示圖片2
+    const sketch2 = (p) => {
+      let img2;
+      p.preload = () => {
+        img2 = p.loadImage('assets/title-2.jpg'); // 請替換成實際的圖片路徑
+      };
+
+      p.setup = () => {
+        const canvas = p.createCanvas(400, 300);
+        canvas.parent("div2");
+      };
+
+      p.draw = () => {
+        p.background(240);
+        p.image(img2, 0, 0, p.width, p.height); // 顯示圖片，填滿畫布
+      };
+    };
+    new p5(sketch2, 'div2');
+
+  </script>
+</body>
+</html>
